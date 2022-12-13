@@ -7,7 +7,7 @@ using TexnofestAPI.Domain.Entities.Common;
 
 namespace TexnofestAPI.Application.Repositories
 {
-    public interface IWriteRepository<T> : IRepository<T> where T : BaseEntity
+    public interface IWriteRepository<T> : IRepository<T> where T : class
     {
         Task AddAsync(T entity);  
         void Update(T entity);
