@@ -1,12 +1,13 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TexnofestAPI.Application.Features.Commands.AppUsers;
+using TexnofestAPI.Application.Features.Commands.Users;
+using TexnofestAPI.Application.Features.Commands.Users.Login;
 using TexnofestAPI.Application.Mapper;
-using TexnofestAPI.Domain.Entities.Identity;
 
 namespace TexnofestAPI.Application
 {
@@ -15,8 +16,8 @@ namespace TexnofestAPI.Application
         public static void AddApplicationRegistration(this IServiceCollection services)
         {
             services.AddAutoMapper(typeof(TexnoFestMapper));
-            services.AddScoped<CreateAppUserHandler>();
-
+            services.AddScoped<UserRegisterCommandHandler>();
+            services.AddScoped<UserLoginCommandHandler>();
         }
     }
 }

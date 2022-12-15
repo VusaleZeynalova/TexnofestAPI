@@ -12,7 +12,7 @@ namespace TexnofestAPI.Application.Repositories
         Task AddAsync(T entity);  
         void Update(T entity);
         Task DeleteAsync(int id);
-        Task SaveAsync();
+        Task<int> SaveAsync();
 
         
 

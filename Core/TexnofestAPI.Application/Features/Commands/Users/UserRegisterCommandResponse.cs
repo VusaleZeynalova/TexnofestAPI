@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TexnofestAPI.Application.Features.Commands.AppUsers
+namespace TexnofestAPI.Application.Features.Commands.Users
 {
-    public class CreateAppUserCommandResponse
+    public class UserRegisterCommandResponse
     {
-        public bool Succeeded { get; set; }
+        public bool Success { get; set; }
         public string Message { get; set; }
     }
 }

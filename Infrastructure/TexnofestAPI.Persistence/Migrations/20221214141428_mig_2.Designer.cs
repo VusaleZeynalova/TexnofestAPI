@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TexnofestAPI.Persistence.Context;
 
@@ -11,9 +12,11 @@ using TexnofestAPI.Persistence.Context;
 namespace TexnofestAPI.Persistence.Migrations
 {
     [DbContext(typeof(TexnofestAPIDbContext))]
-    partial class TexnofestAPIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221214141428_mig_2")]
+    partial class mig2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +37,7 @@ namespace TexnofestAPI.Persistence.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("ProductUser", (string)null);
+                    b.ToTable("ProductUser");
                 });
 
             modelBuilder.Entity("TexnofestAPI.Domain.Entities.Product", b =>
@@ -54,7 +57,7 @@ namespace TexnofestAPI.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("TexnofestAPI.Domain.Entities.User", b =>
@@ -90,7 +93,7 @@ namespace TexnofestAPI.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("ProductUser", b =>

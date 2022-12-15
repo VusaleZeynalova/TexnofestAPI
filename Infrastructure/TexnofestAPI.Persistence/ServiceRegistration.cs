@@ -6,8 +6,11 @@ using System.Linq;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
-using TexnofestAPI.Domain.Entities.Identity;
+using TexnofestAPI.Application.Repositories;
+using TexnofestAPI.Application.Repositories.Users;
 using TexnofestAPI.Persistence.Context;
+using TexnofestAPI.Persistence.Repositories;
+using TexnofestAPI.Persistence.Repositories.UserRepositories;
 
 namespace TexnofestAPI.Persistence
 {
@@ -20,15 +23,9 @@ namespace TexnofestAPI.Persistence
                 options.UseSqlServer(Configuraton.ConnectionString);
 
             });
-            services.AddIdentity<AspNetUser, AppRole>(options =>
-            {
-                options.Password.RequiredLength = 3;
-                options.Password.RequireDigit = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireUppercase = false;
-            }).AddEntityFrameworkStores<TexnofestAPIDbContext>();
+            services.AddScoped<IUserWriteRepository, UserWriteRepository>();
+
+           
         }
     }
 }

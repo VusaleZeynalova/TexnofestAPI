@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TexnofestAPI.Application.Features.Commands.AppUsers;
-using TexnofestAPI.Domain.Entities.Identity;
+using TexnofestAPI.Application.Features.Commands.Users;
+using TexnofestAPI.Application.Features.Commands.Users.Login;
+using TexnofestAPI.Domain.Entities;
 
 namespace TexnofestAPI.Application.Mapper
 {
@@ -13,7 +14,8 @@ namespace TexnofestAPI.Application.Mapper
     {
         public TexnoFestMapper()
         {
-            CreateMap<CreateAppUserCommandRequest, AspNetUser>();
+            CreateMap<UserRegisterCommandRequest, User>().ReverseMap();
+            CreateMap<UserLoginCommandRequest, User>().ReverseMap();
         }
     }
 }
