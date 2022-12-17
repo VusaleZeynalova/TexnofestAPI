@@ -33,7 +33,8 @@ namespace TexnofestAPI.Application.Features.Commands.Users
                 user.PasswordSalt = passwordSalt;
                 user.UserDescription = Guid.NewGuid();
                 await _repository.AddAsync(user);
-                await _repository.SaveAsync();
+             //   await _repository.SaveAsync();
+                await _mailService.SendMessageAsync(user.Email, "Karabakhun Pollution", user.UserDescription);
                 return new()
                 {
                     Success = true,
