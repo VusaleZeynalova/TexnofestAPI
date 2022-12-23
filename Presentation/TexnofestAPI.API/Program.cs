@@ -1,4 +1,5 @@
 using Microsoft.Data.SqlClient;
+using System.Text.Json.Serialization;
 using TexnofestAPI.Application;
 using TexnofestAPI.Infrastructure;
 using TexnofestAPI.Persistence;
@@ -6,7 +7,11 @@ using TexnofestAPI.Persistence;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAuthorization();
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.JsonSerializerOptions.WriteIndented = true;
+}); ;
 builder.Services.AddPersistenceRegistration();
 builder.Services.AddApplicationRegistration();
 builder.Services.AddInfrastructureRegistration();

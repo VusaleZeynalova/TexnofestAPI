@@ -9,14 +9,14 @@ using TexnofestAPI.Application.Abstractions.Services;
 using TexnofestAPI.Application.Repositories.Users;
 using TexnofestAPI.Domain.Entities;
 
-namespace TexnofestAPI.Application.Features.Commands.Users
+namespace TexnofestAPI.Application.Features.Commands.Users.Register
 {
     public class UserRegisterCommandHandler
     {
         private readonly IMapper _mapper;
         private readonly IUserWriteRepository _repository;
         private readonly IMailService _mailService;
-        public UserRegisterCommandHandler(IMapper mapper, IUserWriteRepository repository,IMailService mailService)
+        public UserRegisterCommandHandler(IMapper mapper, IUserWriteRepository repository, IMailService mailService)
         {
             _mapper = mapper;
             _repository = repository;
@@ -26,14 +26,14 @@ namespace TexnofestAPI.Application.Features.Commands.Users
         {
             try
             {
-              CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+                CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
                 User user = _mapper.Map<User>(request);
                 user.PasswordHash = passwordHash;
                 user.PasswordSalt = passwordSalt;
                 user.UserDescription = Guid.NewGuid();
                 await _repository.AddAsync(user);
-             //   await _repository.SaveAsync();
+                await _repository.SaveAsync();
                 await _mailService.SendMessageAsync(user.Email, "Karabakhun Pollution", user.UserDescription);
                 return new()
                 {
@@ -62,6 +62,6 @@ namespace TexnofestAPI.Application.Features.Commands.Users
                 passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
             }
         }
-       
+
     }
 }

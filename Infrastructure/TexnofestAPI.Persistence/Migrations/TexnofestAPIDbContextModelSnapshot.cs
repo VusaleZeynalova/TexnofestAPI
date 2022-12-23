@@ -22,28 +22,13 @@ namespace TexnofestAPI.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ProductUser", b =>
-                {
-                    b.Property<int>("ProductsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("ProductUser", (string)null);
-                });
-
             modelBuilder.Entity("TexnofestAPI.Domain.Entities.Product", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
 
                     b.Property<string>("ProductName")
                         .IsRequired()
@@ -52,18 +37,33 @@ namespace TexnofestAPI.Persistence.Migrations
                     b.Property<int>("ProductPoint")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("ProductId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("TexnofestAPI.Domain.Entities.ProductUser", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ProductUsers");
                 });
 
             modelBuilder.Entity("TexnofestAPI.Domain.Entities.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -88,24 +88,38 @@ namespace TexnofestAPI.Persistence.Migrations
                     b.Property<Guid>("UserDescription")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("ProductUser", b =>
+            modelBuilder.Entity("TexnofestAPI.Domain.Entities.ProductUser", b =>
                 {
-                    b.HasOne("TexnofestAPI.Domain.Entities.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
+                    b.HasOne("TexnofestAPI.Domain.Entities.Product", "Product")
+                        .WithMany("ProductUsers")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TexnofestAPI.Domain.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
+                    b.HasOne("TexnofestAPI.Domain.Entities.User", "User")
+                        .WithMany("ProductUsers")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("TexnofestAPI.Domain.Entities.Product", b =>
+                {
+                    b.Navigation("ProductUsers");
+                });
+
+            modelBuilder.Entity("TexnofestAPI.Domain.Entities.User", b =>
+                {
+                    b.Navigation("ProductUsers");
                 });
 #pragma warning restore 612, 618
         }

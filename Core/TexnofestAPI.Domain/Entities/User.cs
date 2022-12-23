@@ -9,13 +9,15 @@ namespace TexnofestAPI.Domain.Entities
 {
     public class User : BaseEntity
     {
-        public int Id { get; set; }
+        public int UserId { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public Guid UserDescription { get; set; }
-        public List<Product> Products { get; set; }
+        public List<ProductUser> ProductUsers { get; set; }
+
+
     }
 }

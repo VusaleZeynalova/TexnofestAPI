@@ -7,9 +7,11 @@ using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 using TexnofestAPI.Application.Repositories;
+using TexnofestAPI.Application.Repositories.Products;
 using TexnofestAPI.Application.Repositories.Users;
 using TexnofestAPI.Persistence.Context;
 using TexnofestAPI.Persistence.Repositories;
+using TexnofestAPI.Persistence.Repositories.Products;
 using TexnofestAPI.Persistence.Repositories.UserRepositories;
 
 namespace TexnofestAPI.Persistence
@@ -23,8 +25,11 @@ namespace TexnofestAPI.Persistence
                 options.UseSqlServer(Configuraton.ConnectionString);
 
             });
-            services.AddScoped<IUserWriteRepository, UserWriteRepository>();
 
+            services.AddScoped<IUserWriteRepository, UserWriteRepository>();
+            services.AddScoped<IUserReadRepository, UserReadRepository>();
+
+            services.AddScoped<IProductReadRepository, ProductReadRepository>();
            
         }
     }

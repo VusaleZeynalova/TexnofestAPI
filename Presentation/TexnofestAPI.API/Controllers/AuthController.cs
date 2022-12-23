@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TexnofestAPI.Application.Features.Commands.Users;
 using TexnofestAPI.Application.Features.Commands.Users.Login;
+using TexnofestAPI.Application.Features.Commands.Users.Register;
 using TexnofestAPI.Persistence.Context;
 
 namespace TexnofestAPI.API.Controllers

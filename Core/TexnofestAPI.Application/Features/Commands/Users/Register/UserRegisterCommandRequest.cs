@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TexnofestAPI.Application.Features.Commands.Users
+namespace TexnofestAPI.Application.Features.Commands.Users.Register
 {
     public class UserRegisterCommandRequest
     {

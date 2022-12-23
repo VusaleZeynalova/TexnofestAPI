@@ -9,10 +9,10 @@ namespace TexnofestAPI.Domain.Entities
 {
     public class Product:BaseEntity
     {
-        public int Id { get; set; }
+        public int ProductId { get; set; }
         public string ProductName { get; set; }
         public int ProductPoint { get; set; }
-        public List<User> Users { get; set; }
+        public List<ProductUser> ProductUsers { get; set; }
 
     }
 }
